@@ -1,0 +1,21 @@
+.wrapper {
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1210px;
+  padding: 0 15px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+body {
+  background: red;
+}/*# sourceMappingURL=main.css.map */

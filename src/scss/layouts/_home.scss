@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.content_box {
+    border: 1px solid black;
+    max-width: 500px;
+    min-height: 300px;
+    border-radius: 18px;
+    margin-top: 80px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 80px;
+    padding: 25px;
+}
+
+.header {
+
+    &-tab_content {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+    }
+
+    &_add {
+        cursor: pointer;
+        border-radius: 35px;
+        border: none;
+        padding: 10px;
+        border: 2px solid transparent;
+    }
+
+    &_tab {
+        border-radius: 20px;
+        padding: 10px 20px;
+        min-width: 86px;
+        min-height: 23px;
+        background: #d4e8d9;
+        text-align: center;
+        font-weight: 500;
+        font-size: 20px;
+        color: #2c2d35;
+        font-family: "Raleway", sans-serif;
+        cursor: pointer;
+
+    }
+
+
+
+}
+
+.body {
+    margin-top: 49px;
+    padding: 10px;
+
+    &-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "Raleway", sans-serif;
+        font-size: 25px;
+        border: 2px solid;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #376b44;
+        color: #f4f6f5;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+}
+
+
+.modal {
+    display: none;
+    /* Скрыто по умолчанию */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    z-index: 1001;
+    /* Поверх оверлея */
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+    &_input {
+        display: block;
+        margin: 0 auto;
+        cursor: pointer;
+
+    }
+
+    &_title {
+        text-align: center;
+        font-size: 20px;
+        font-family: "Raleway", sans-serif;
+    }
+
+    &_btn {
+        display: block;
+        margin: 0 auto;
+        margin-top: 40px;
+        padding: 20px 60px;
+        width: 227px;
+        height: 65px;
+        background-color: #18a9de;
+        font-family: "Raleway", sans-serif;
+        font-size: 20px;
+        border: none;
+    }
+
+    &_btn:hover {
+        border: 1px solid;
+    }
+
+    &_content_box {
+        display: flex;
+        justify-content: center;
+    }
+
+    &_close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+
+
+}
+
+.color {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+
+    &__item-1 {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+
+    &__item-2 {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    &__item-3 {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    &__item-1:hover {
+        border: 2px solid;
+    }
+
+    &__item-2:hover {
+        border: 2px solid;
+    }
+
+    &__item-3:hover {
+        border: 2px solid;
+    }
+
+}
+
+.overlay {
+    display: none;
+    /* Скрыт по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* Полупрозрачный черный */
+    z-index: 1000;
+    /* Поверх всего */
+}
+
+
+/* Кнопка закрытия */
+
+.block {
+    display: block;
+}
+
+.delete_btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn_close {
+    display: flex;
+    justify-content: flex-end;
+
+
+    button {
+        border-radius: 25px;
+        width: 50px;
+        height: 50px;
+        border: none;
+        font-size: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+    }
+
+}
+
+.header_tab {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.header_tab.active {
+    font-weight: bold;
+    background: #376b44;
+    color: #f4f6f5;
+    cursor: pointer;
+}
