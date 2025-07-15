@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-do</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="content_box">
+      <div class="container">
+
+        <div class="header">
+          <div class="header-tab_content">
+            <div class="header_tab active   js-header-tab-active ">активные </div>
+            <div class="header_tab  js-header-tab-close">закрытые</div>
+            <button class="header_add js-header-add ">
+              <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M13 3C13 2.44772 12.5523 2 12 2C11.4477 2 11 2.44772 11 3V11H3C2.44772 11 2 11.4477 2 12C2 12.5523 2.44772 13 3 13H11V21C11 21.5523 11.4477 22 12 22C12.5523 22 13 21.5523 13 21V13H21C21.5523 13 22 12.5523 22 12C22 11.4477 21.5523 11 21 11H13V3Z"
+                  fill="#0F0F0F" />
+              </svg>
+
+            </button>
+
+          </div>
+
+        </div>
+        <div class="body js-body">
+
+
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="modals">
+    <div class="overlay js-overlay" id="overlay"></div>
+    <div class="modal js-modal" id="modal">
+      <div class="modal__content">
+        <div class="btn_close"> <button class="close-modal js-close-modal">&times;</button></div>
+        <input class="modal_input js-modal-input" type="text" placeholder="напиши что нибудь...">
+
+        <p class="modal_title">выбери цвет</p>
+        <div class="color">
+
+          <button class="color__item-1  js-color-item-1"></button>
+          <button class="color__item-2  js-color-item-2"></button>
+          <button class="color__item-3  js-color-item-3"></button>
+        </div>
+        <button class="modal_btn js-modal-btn">добавить</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
