@@ -19,7 +19,7 @@ const modalBtn = document.querySelector(".js-modal-btn");
 
 let todos = [];
 
-let currentFilter = "all"; // 'all', 'active' или 'completed'
+let currentFilter = "all";
 
 // При клике на "Активные"
 headerTabActive.addEventListener("click", () => {
@@ -87,19 +87,23 @@ function setColor() {
 }
 setColor();
 
+todos = JSON.parse(localStorage.getItem("tasks"));
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(todos));
+}
+
 function addTodo() {
   const todo = {
     id: Math.trunc(Math.random() * 99999),
     text: modalInput.value,
     color: color,
     completed: false,
-    createDate: new Date(),
+    createDate: Date.now(),
   };
 
   todos.push(todo);
-  console.log(todos);
-
   renderTodos(todo);
+  saveTasks();
   modalClose();
 }
 
@@ -126,6 +130,7 @@ function renderTodo(todo) {
   taskItem.className = "body-item";
   taskItem.dataset.id = todo.id;
   const taskId = Date.now();
+  taskItem.dataset.createdAt = todo.createDate;
 
   if (todo.color) {
     taskItem.style.backgroundColor = todo.color;
@@ -137,7 +142,7 @@ function renderTodo(todo) {
   taskItem.innerHTML = `
   <div >
     <div class="task-text">${todo.text}</div>
-    <div class="task-time">${formatTimeAgo(todo.createDate)}</div>
+    <div class="task-time">${formatTimeAgo(new Date(todo.createDate))}</div>
     
   </div>
   <div class="body-icon">
@@ -161,8 +166,11 @@ function renderTodo(todo) {
     renderTodos();
   });
 
-  taskItem.dataset.createdAt = todo.createDate.getTime();
   bodyList.append(taskItem);
+  saveTasks();
+}
+if (localStorage.length != 0) {
+  renderTodos();
 }
 
 setInterval(() => {
