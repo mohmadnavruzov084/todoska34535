@@ -19,7 +19,7 @@ const modalBtn = document.querySelector(".js-modal-btn");
 
 let todos = [];
 
-let currentFilter = "all";
+let currentFilter = "active";
 
 // При клике на "Активные"
 headerTabActive.addEventListener("click", () => {
@@ -39,13 +39,10 @@ headerTabClose.addEventListener("click", () => {
 
 // Функция фильтрации
 function filterTodos() {
-  if (currentFilter === "active") {
-    return todos.filter((todo) => !todo.completed);
-  } else if (currentFilter === "completed") {
-    return todos.filter((todo) => todo.completed);
-  } else {
-    return todos; // Показывает все задачи
-  }
+  if (currentFilter === "all") return todos;
+  return todos.filter((todo) =>
+    currentFilter === "active" ? !todo.completed : todo.completed
+  );
 }
 
 function openModal() {
@@ -68,28 +65,50 @@ function getTextInput() {
 modalBtn.addEventListener("click", getTextInput);
 
 let color = "blue";
-function setColor() {
-  allColorBtn.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      allColorBtn.forEach((button) => {
-        button.style.border = "2px solid transparent";
-      });
-      btn.style.border = "2px solid black";
-      if (btn.classList.contains("js-color-item-1")) {
-        color = "red";
-      } else if (btn.classList.contains("js-color-item-2")) {
-        color = "green";
-      } else if (btn.classList.contains("js-color-item-3")) {
-        color = "blue";
-      }
-    });
-  });
-}
-setColor();
+// function setColor() {
+//   allColorBtn.forEach((btn) => {
+//     btn.addEventListener("click", () => {
+//       allColorBtn.forEach((button) => {
+//         button.style.border = "2px solid transparent";
+//       });
+//       btn.style.border = "2px solid black";
+//       if (btn.classList.contains("js-color-item-1")) {
+//         color = "red";
+//       } else if (btn.classList.contains("js-color-item-2")) {
+//         color = "green";
+//       } else if (btn.classList.contains("js-color-item-3")) {
+//         color = "blue";
+//       }
+//     });
+//   });
+// }
+// setColor();
 
-todos = JSON.parse(localStorage.getItem("tasks"));
+const setColor = (currentButton) => {
+  allColorBtn.forEach((btn) => {
+    btn.style.border = "none";
+  });
+
+  currentButton.style.border = "2px solid black";
+  if (currentButton.classList.contains("js-color-item-1")) {
+    color = "red";
+  } else if (currentButton.classList.contains("js-color-item-2")) {
+    color = "green";
+  } else if (currentButton.classList.contains("js-color-item-3")) {
+    color = "blue";
+  }
+};
+
+allColorBtn.forEach((btn) => {
+  btn.addEventListener("click", () => setColor(btn));
+});
+
+todos = JSON.parse(localStorage.getItem("tasks")) ?? [];
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(todos));
+}
+if (todos.length > 0) {
+  renderTodos();
 }
 
 function addTodo() {
@@ -129,7 +148,6 @@ function renderTodo(todo) {
   const taskItem = document.createElement("div");
   taskItem.className = "body-item";
   taskItem.dataset.id = todo.id;
-  const taskId = Date.now();
   taskItem.dataset.createdAt = todo.createDate;
 
   if (todo.color) {
@@ -157,20 +175,30 @@ function renderTodo(todo) {
   taskItem.addEventListener("click", (e) => {
     if (!e.target.closest(".js-delete-btn")) {
       todo.completed = !todo.completed;
+      saveTasks();
+      if (
+        (currentFilter === "active" && todo.completed) ||
+        (currentFilter === "completed" && !todo.completed)
+      ) {
+        taskItem.remove();
+      }
       renderTodos();
     }
   });
 
-  taskItem.querySelector(".js-delete-btn").addEventListener("click", () => {
+  taskItem.querySelector(".js-delete-btn").addEventListener("click", (e) => {
+    e.stopPropagation();
     todos = todos.filter((item) => item.id !== todo.id);
+    saveTasks();
     renderTodos();
+
+    if (todos.length === 0) {
+      localStorage.removeItem("tasks");
+    }
   });
 
   bodyList.append(taskItem);
   saveTasks();
-}
-if (localStorage.length != 0) {
-  renderTodos();
 }
 
 setInterval(() => {
